@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B6F2571125FEF45D00DABF05 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = B6F2571025FEF45D00DABF05 /* main.c */; };
+		B6F2571A25FEF4ED00DABF05 /* pnm.c in Sources */ = {isa = PBXBuildFile; fileRef = B6F2571925FEF4ED00DABF05 /* pnm.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,18 @@
 /* Begin PBXFileReference section */
 		B6F2570D25FEF45D00DABF05 /* pnm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pnm; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F2571025FEF45D00DABF05 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		B6F2571825FEF4ED00DABF05 /* pnm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pnm.h; sourceTree = "<group>"; };
+		B6F2571925FEF4ED00DABF05 /* pnm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = pnm.c; sourceTree = "<group>"; };
+		B6F2571F25FEF55500DABF05 /* pnm.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = pnm.pdf; sourceTree = "<group>"; };
+		B6F2572125FEF57E00DABF05 /* hippocampe.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hippocampe.pbm; sourceTree = "<group>"; };
+		B6F2572225FEF57E00DABF05 /* washington.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = washington.pbm; sourceTree = "<group>"; };
+		B6F2572325FEF57E00DABF05 /* poivron.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = poivron.pgm; sourceTree = "<group>"; };
+		B6F2572425FEF57E00DABF05 /* totem.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = totem.pgm; sourceTree = "<group>"; };
+		B6F2572525FEF57E00DABF05 /* arcenciel.ppm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = arcenciel.ppm; sourceTree = "<group>"; };
+		B6F2572625FEF57E00DABF05 /* monalisa.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = monalisa.pgm; sourceTree = "<group>"; };
+		B6F2572725FEF57E00DABF05 /* antilope.ppm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = antilope.ppm; sourceTree = "<group>"; };
+		B6F2572825FEF57E00DABF05 /* escargot.ppm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = escargot.ppm; sourceTree = "<group>"; };
+		B6F2572925FEF57E00DABF05 /* scs.pbm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scs.pbm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +54,7 @@
 		B6F2570425FEF45D00DABF05 = {
 			isa = PBXGroup;
 			children = (
+				B6F2571E25FEF55500DABF05 /* Info */,
 				B6F2570F25FEF45D00DABF05 /* pnm */,
 				B6F2570E25FEF45D00DABF05 /* Products */,
 			);
@@ -57,9 +71,36 @@
 		B6F2570F25FEF45D00DABF05 /* pnm */ = {
 			isa = PBXGroup;
 			children = (
+				B6F2572025FEF57E00DABF05 /* exemples_images */,
 				B6F2571025FEF45D00DABF05 /* main.c */,
+				B6F2571825FEF4ED00DABF05 /* pnm.h */,
+				B6F2571925FEF4ED00DABF05 /* pnm.c */,
 			);
 			path = pnm;
+			sourceTree = "<group>";
+		};
+		B6F2571E25FEF55500DABF05 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				B6F2571F25FEF55500DABF05 /* pnm.pdf */,
+			);
+			path = Info;
+			sourceTree = "<group>";
+		};
+		B6F2572025FEF57E00DABF05 /* exemples_images */ = {
+			isa = PBXGroup;
+			children = (
+				B6F2572125FEF57E00DABF05 /* hippocampe.pbm */,
+				B6F2572225FEF57E00DABF05 /* washington.pbm */,
+				B6F2572325FEF57E00DABF05 /* poivron.pgm */,
+				B6F2572425FEF57E00DABF05 /* totem.pgm */,
+				B6F2572525FEF57E00DABF05 /* arcenciel.ppm */,
+				B6F2572625FEF57E00DABF05 /* monalisa.pgm */,
+				B6F2572725FEF57E00DABF05 /* antilope.ppm */,
+				B6F2572825FEF57E00DABF05 /* escargot.ppm */,
+				B6F2572925FEF57E00DABF05 /* scs.pbm */,
+			);
+			path = exemples_images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F2571125FEF45D00DABF05 /* main.c in Sources */,
+				B6F2571A25FEF4ED00DABF05 /* pnm.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

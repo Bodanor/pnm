@@ -11,11 +11,11 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [
                 "-i",
-                "monalisa.pgm",
+                "washington.pbm",
                 "-o",
                 "chris",
                 "-f",
-                "pgm"
+                "pbm"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

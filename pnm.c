@@ -233,6 +233,30 @@ static int allocate_matrix(PNM *image)
    return 0;
 
 }
+static int load_matrix(PNM *image, FILE *input_file)
+{
+   int c;
+   int i = 0;
+   int **matrix = image->matrix;
+
+   while ((c = fgetc(input_file)) != EOF)
+   {
+      if (c == '#')
+         while ((c = fgetc(input_file)) != '\n' && c != '\r')
+            ;
+      else if (c != '\n' && c != ' ' && c != '\r')
+      {
+         if (isdigit(c) == 0)
+         {
+            printf("Non digit char detected in the pixel descriptor of the file %d!\n",i);
+            return -1;
+         }
+         //*(image->matrix)++ = c- '0';
+         i++;
+      }
+   }
+   return 0;
+}
 int load_pnm(PNM **image, char* filename) {
 
    assert(*image != NULL);
@@ -259,6 +283,8 @@ int load_pnm(PNM **image, char* filename) {
    if (strcmp((*image)->header_format, "P2") == 0 || strcmp((*image)->header_format, "P3") == 0)
       if (get_pixel_intensity(*image, input_file) == -1)
          return -1;
+   
+   load_matrix(*image, input_file);
    return 0;
 }
 

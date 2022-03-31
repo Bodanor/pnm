@@ -17,7 +17,7 @@
 #include <getopt.h>
 #include <string.h>
 
-#include "pnm.h"
+#include "include/pnm.h"
 
 
 int main(int argc, char *argv[]) {

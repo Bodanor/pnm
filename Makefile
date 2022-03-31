@@ -14,7 +14,7 @@ LDFLAGS=
 
 # Files
 EXEC=pnm
-MODULES=main.c pnm.c
+MODULES=main.c lib/pnm.c
 OBJECTS=main.o pnm.o
 
 ## Rules
@@ -27,8 +27,8 @@ pnm: $(OBJECTS)
 main.o: main.c
 	$(CC) -c main.c -o main.o $(CFLAGS)
 
-pnm.o: pnm.c
-	$(CC) -c pnm.c -o pnm.o $(CFLAGS)
+pnm.o: lib/pnm.c
+	$(CC) -c lib/pnm.c -o pnm.o $(CFLAGS)
 
 clean:
 	rm -f *.o $(EXEC) *~

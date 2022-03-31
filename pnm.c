@@ -320,38 +320,40 @@ int load_pnm(PNM **image, char* filename) {
 int write_pnm(PNM *image, char* filename) {
 
    FILE *output_file = openFile(filename);
+
    int i, j;
-   long long recorded_bytes = 0;
+   long long recorded_bytes;
 
    if (output_file == NULL)
       return -1;
    
    printf("Writing data to \"%s\"...\n", filename);
 
-   recorded_bytes += fprintf(output_file, "%s\n", image->header_format);
+   fprintf(output_file, "%s\n", image->header_format);
    if (strcmp((image)->header_format, "P3") == 0)
-      recorded_bytes += fprintf(output_file, "%d ", image->columns / 3);
+      fprintf(output_file, "%d ", image->columns / 3);
    else
-      recorded_bytes += fprintf(output_file, "%d ", image->columns);
+      fprintf(output_file, "%d ", image->columns);
 
-   recorded_bytes += fprintf(output_file, "%d\n", image->rows);
+  fprintf(output_file, "%d\n", image->rows);
 
    if (strcmp((image)->header_format, "P2") == 0 || strcmp((image)->header_format, "P3") == 0)
    {
-      recorded_bytes += fprintf(output_file, "%d\n", image->pixel_intensity);
+      fprintf(output_file, "%d\n", image->pixel_intensity);
    }
 
    for (j = 0; j < image->rows; j++)
    {
       for (i = 0; i < image->columns; i++)
-      {
-         recorded_bytes += fprintf(output_file, "%d\t",  *(*(image->matrix + j) + i));
-      }
+         fprintf(output_file, "%d\t",  *(*(image->matrix + j) + i));
+      
       fputc('\n', output_file);
-      recorded_bytes ++;
    }
-   fclose(output_file);
+
+   recorded_bytes = ftell(output_file);
    
+   fclose(output_file);
+
    printf("Recorded :\n>>%lld b\n", recorded_bytes);
    printf(">>%.2lf Mb\n", (recorded_bytes * pow(10, -6)));
    printf(">>%.2lf Gb\n\n",(recorded_bytes * pow(10, -9)));

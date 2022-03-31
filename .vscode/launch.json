@@ -11,11 +11,11 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [
                 "-i",
-                "monalisa.pgm",
+                "antilope.ppm",
                 "-o",
-                "test.pgm",
+                "test.ppm",
                 "-f",
-                "pgm"
+                "ppm"
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

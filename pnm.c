@@ -174,6 +174,10 @@ static int get_matrix_size(PNM *image, FILE *input_file)
       }
    
    image->columns = atoi(columns);
+   
+   if (strcmp((image)->header_format, "P3") == 0)
+      image->columns *= 3;
+
    for (i = 0; i < (int)strlen(rows); i++)
       if (isdigit(rows[i]) == 0)
          {
@@ -321,10 +325,16 @@ int write_pnm(PNM *image, char* filename) {
    if (output_file == NULL)
       return -1;
    
-   printf("Writing data to \"%s\"...", filename);
+   printf("Writing data to \"%s\"...\n", filename);
 
    fprintf(output_file, "%s\n", image->header_format);
-   fprintf(output_file, "%d %d\n", image->columns, image->rows);
+   if (strcmp((image)->header_format, "P3") == 0)
+      fprintf(output_file, "%d ", image->columns / 3);
+   else
+      fprintf(output_file, "%d ", image->columns);
+
+   fprintf(output_file, "%d\n", image->rows);
+
    if (strcmp((image)->header_format, "P2") == 0 || strcmp((image)->header_format, "P3") == 0)
    {
       fprintf(output_file, "%d\n", image->pixel_intensity);

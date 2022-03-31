@@ -23,7 +23,7 @@
 #include <ctype.h>
 #include <time.h>
 #include <unistd.h>
-
+#include <math.h>
 
 /**
  * Déclaration du type opaque PNM

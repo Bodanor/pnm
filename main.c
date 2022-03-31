@@ -97,6 +97,7 @@ int main(int argc, char *argv[]) {
       return -1;
 
    write_pnm(image, output_path);
+   
    return 0;
 }
 

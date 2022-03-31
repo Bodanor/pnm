@@ -389,3 +389,44 @@ int verify_forbidden_input_char(char *string)
    }
    return 0;
 }
+
+long encrypt_pnm_random(PNM *image, long seed)
+{
+
+   assert(image != NULL);
+   int i, j;
+
+   if (seed == -1)
+      seed = time(NULL);
+   
+   srand(seed);
+
+   printf("NOTE THE SEED KEY TO DECRYPT THE IMAGE !!\nEncrypting with seed : <%ld>\n\n", seed);
+   srand(seed);
+   for (j = 0; j < image->rows; j++)
+   {
+      for (i = 0; i < image->columns; i++)
+      {
+         *(*(image->matrix + j) + i) += rand() % 65535 + 1;
+      }
+   }
+
+   return seed;
+}
+
+void decrypt_pnm_random(PNM *image, long seed)
+{
+   assert(image != NULL);
+
+   int i, j;
+   srand(seed);
+
+   for (j = 0; j < image->rows; j++)
+   {
+      for (i = 0; i < image->columns; i++)
+      {
+         *(*(image->matrix + j) + i) -= rand() % 65535 + 1;
+      }
+   }
+
+}

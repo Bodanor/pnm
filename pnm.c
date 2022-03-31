@@ -51,14 +51,17 @@ static FILE *openFile(char *filename)
 {
    assert(filename != NULL);
 
-   FILE *fp = fopen(filename, "a+b");
+   FILE *fp = fopen(filename, "r+b");
    if (fp == NULL)
    {
-      printf("Couldn't load file %s\nReason : %s", filename, strerror(errno));
-      return NULL;
+      fp = fopen(filename, "w+b");
+      if (fp == NULL)
+      {
+         printf("Couldn't load file %s\nReason : %s", filename, strerror(errno));
+         return NULL;
+      }
    }
-   else
-      return fp;
+   return fp;
 }
 
 static int verify_matching_extension(PNM *image, char *filename)
@@ -201,6 +204,8 @@ static int get_pixel_intensity(PNM *image, FILE *input_file)
          *pt_pixel++ = c;
    }
 
+   *pt_pixel = '\0';
+
    for (i = 0; i < (int)strlen(pixel_intensity); i++)
       if (isdigit(pixel_intensity[i]) == 0)
       {
@@ -236,8 +241,11 @@ static int allocate_matrix(PNM *image)
 static int load_matrix(PNM *image, FILE *input_file)
 {
    int c;
-   int i = 0;
-   int **matrix = image->matrix;
+   int i, j;
+   i = j = 0;
+
+   char buffer[10];
+   char *pt_buff = buffer;
 
    while ((c = fgetc(input_file)) != EOF)
    {
@@ -251,8 +259,21 @@ static int load_matrix(PNM *image, FILE *input_file)
             printf("Non digit char detected in the pixel descriptor of the file %d!\n",i);
             return -1;
          }
-         //*(image->matrix)++ = c- '0';
+         *pt_buff++ = c;
+      }
+      else if (pt_buff != buffer)
+      {
+         *pt_buff = '\0';
+
+         if (i == image->columns)
+         {
+            i = 0;
+            j++;
+         }
+         *(*(image->matrix + j) + i) = atoi(buffer);
          i++;
+         pt_buff = buffer;
+
       }
    }
    return 0;
@@ -284,19 +305,40 @@ int load_pnm(PNM **image, char* filename) {
       if (get_pixel_intensity(*image, input_file) == -1)
          return -1;
    
-   load_matrix(*image, input_file);
+   if (load_matrix(*image, input_file) == -1)
+      return -1;
+   
+   fclose(input_file);
+   
    return 0;
 }
 
 int write_pnm(PNM *image, char* filename) {
 
-   FILE *output = openFile(filename);
-   int i, x;
-   srand(time(NULL));
+   FILE *output_file = openFile(filename);
+   int i, j;
 
-   for (i = 0; i < image->rows ; i++)
-      for (x = 0; x < image->columns ; x++)
-         fprintf(output, "%d ", *(*(image->matrix + i) + x));
+   if (output_file == NULL)
+      return -1;
+   
+   printf("Writing data to \"%s\"...", filename);
+
+   fprintf(output_file, "%s\n", image->header_format);
+   fprintf(output_file, "%d %d\n", image->columns, image->rows);
+   if (strcmp((image)->header_format, "P2") == 0 || strcmp((image)->header_format, "P3") == 0)
+   {
+      fprintf(output_file, "%d\n", image->pixel_intensity);
+   }
+
+   for (j = 0; j < image->rows; j++)
+   {
+      for (i = 0; i < image->columns; i++)
+      {
+         fprintf(output_file, "%d\t",  *(*(image->matrix + j) + i));
+      }
+      fputc('\n', output_file);
+   }
+   fclose(output_file);
    
    return 0;
 }

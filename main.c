@@ -93,8 +93,10 @@ int main(int argc, char *argv[]) {
    if (image == NULL)
       return -1;
    
-   load_pnm(&image, input_path);
-   //write_pnm(image, output_path);
+   if (load_pnm(&image, input_path) != 0)
+      return -1;
+
+   write_pnm(image, output_path);
    return 0;
 }
 

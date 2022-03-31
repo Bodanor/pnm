@@ -145,7 +145,7 @@ static int get_matrix_size(PNM *image, FILE *input_file)
    char *pt_columns= columns;
    char *pt_rows = rows;
 
-   while ((c = fgetc(input_file)) && lastc != ' ')
+   while (lastc != ' ' && (c = fgetc(input_file)))
    {
       if (c == ' ' && lastc == 0)
          while ((c = fgetc(input_file)) == ' ');

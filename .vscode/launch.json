@@ -11,7 +11,7 @@
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [
                 "-i",
-                "images/arcenciel.ppm",
+                "images/antilope.ppm",
                 "-o",
                 "test.ppm",
                 "-f",

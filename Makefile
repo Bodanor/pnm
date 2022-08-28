@@ -9,27 +9,26 @@
 # Tools & flags
 CC=gcc
 CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
-LD=gcc
-LDFLAGS=
 
 # Files
 EXEC=pnm
-MODULES=main.c lib/pnm.c
-OBJECTS=main.o pnm.o
+LIBS=liblfsr/lfsr.a  libpnm/libpnm.a
 
 ## Rules
 
 all: $(EXEC)
 
-pnm: $(OBJECTS)
-	$(LD) -o $(EXEC) $(OBJECTS) $(LDFLAGS)
+$(EXEC): $(LIBS) main.c
+	$(CC) -o $(EXEC) main.c -lpnm -llfsr -L liblfsr -L libpnm
 
-main.o: main.c
-	$(CC) -c main.c -o main.o $(CFLAGS)
 
-pnm.o: lib/pnm.c
-	$(CC) -c lib/pnm.c -o pnm.o $(CFLAGS)
+liblfsr/lfsr.a:
+	cd liblfsr; make
+
+libpnm/libpnm.a:
+	cd libpnm; make
 
 clean:
-	rm -f *.o $(EXEC) *~
+	cd liblfsr; make clean
+	cd libpnm; make clean
 

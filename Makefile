@@ -12,7 +12,7 @@ CFLAGS=--std=c99 --pedantic -Wall -W -Wmissing-prototypes
 
 # Files
 EXEC=pnm
-LIBS=liblfsr/lfsr.a  libpnm/libpnm.a
+LIBS=liblfsr/liblfsr.a libpnm/libpnm.a
 
 ## Rules
 
@@ -30,7 +30,7 @@ advanced_cypher: $(LIBS) advanced_cypher.c
 	@echo "[+] Making advanced_cypher"
 	$(CC) -o advanced_cypher advanced_cypher.c -lpnm -llfsr -L liblfsr -L libpnm
 
-liblfsr/lfsr.a:
+liblfsr/liblfsr.a:
 	cd liblfsr; make
 
 libpnm/libpnm.a:

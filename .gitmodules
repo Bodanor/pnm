@@ -1,0 +1,6 @@
+[submodule "libpnm"]
+	path = libpnm
+	url = https://github.com/bodanor/lib-pnm
+[submodule "liblfsr"]
+	path = liblfsr
+	url = https://github.com/bodanor/lib-lfsr

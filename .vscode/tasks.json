@@ -7,8 +7,9 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                "lib/pnm.c",
-                "*.c",
+                "main.c",
+                "libpnm/pnm.c",
+                "liblfsr/lfsr.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
